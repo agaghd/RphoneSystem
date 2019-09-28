@@ -5,10 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.view.MotionEvent
+import cn.jpush.android.api.JPushInterface
+import io.agaghd.rphonesystem.flashlight.FlashLightIntentService
 import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
 import io.agaghd.rphonesystem.flashlight.WifiIpHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,6 +59,13 @@ class MainActivity : AppCompatActivity() {
             runOnUiThread {
                 ip_tv.text = "本地局域网IP：$addr"
                 target_ip_et.setText(if (TextUtils.isEmpty(targetIp)) addr else targetIp)
+                Handler().postDelayed({
+                    JPushInterface.setAlias(this, 1, "flash_light")
+                    val set = HashSet<String>()
+                    set.add("flash_light_$addr")
+                    Log.i("jiguang", "flash_light_$addr")
+                    JPushInterface.setTags(this, 1, set)
+                }, 3000)
             }
         }).start()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

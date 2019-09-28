@@ -3,13 +3,13 @@
 buildscript {
     ext.kotlin_version = '1.3.41'
     repositories {
-        google()
+        jcenter()
         // 添加阿里云 maven 地址
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
         // jcenter()
-        jcenter()
-        
+        google()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
@@ -21,9 +21,9 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         jcenter()
-        
+        google()
+
     }
 }
 

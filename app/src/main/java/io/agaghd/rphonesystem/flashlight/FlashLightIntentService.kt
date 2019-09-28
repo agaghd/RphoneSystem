@@ -1,11 +1,8 @@
-package io.agaghd.rphonesystem
+package io.agaghd.rphonesystem.flashlight
 
 import android.app.IntentService
 import android.content.Intent
-import android.content.Context
 import android.util.Log
-import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
-import io.agaghd.rphonesystem.flashlight.WifiIpHelper
 import java.lang.Exception
 import java.net.DatagramPacket
 import java.net.DatagramSocket
