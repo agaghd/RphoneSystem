@@ -72,26 +72,45 @@
     <Button
             android:id="@+id/toggle_flash_light_btn"
             android:layout_width="0dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginStart="96dp"
-            android:layout_marginEnd="96dp"
             android:layout_height="96dp"
+            android:layout_margin="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/toggle_flash_light_remote_btn"
             android:text="@string/toggle_flash_light"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/target_ip_hint_tv"/>
 
     <Button
+            android:id="@+id/toggle_flash_light_remote_btn"
+            android:layout_width="0dp"
+            android:layout_height="96dp"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toRightOf="@id/toggle_flash_light_btn"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/toggle_flash_light_remote"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/target_ip_hint_tv"/>
+
+
+    <Button
             android:id="@+id/touch_flash_light_btn"
             android:layout_width="0dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginStart="96dp"
-            android:layout_marginEnd="96dp"
+            android:layout_margin="16dp"
             android:layout_height="96dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/touch_flash_light_remote_btn"
             android:text="@string/touch_flash_light"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/toggle_flash_light_btn"/>
+
+    <Button
+            android:id="@+id/touch_flash_light_remote_btn"
+            android:layout_width="0dp"
+            android:layout_margin="16dp"
+            android:layout_height="96dp"
+            app:layout_constraintLeft_toRightOf="@id/touch_flash_light_btn"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="@string/touch_flash_light_remote"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/toggle_flash_light_btn"/>
 

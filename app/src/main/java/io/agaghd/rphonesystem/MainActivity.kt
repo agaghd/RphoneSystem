@@ -3,6 +3,7 @@ package io.agaghd.rphonesystem
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -10,16 +11,21 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Log
 import android.view.MotionEvent
+import android.widget.Toast
 import cn.jpush.android.api.JPushInterface
 import io.agaghd.rphonesystem.flashlight.FlashLightIntentService
 import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
 import io.agaghd.rphonesystem.flashlight.WifiIpHelper
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 
 class MainActivity : AppCompatActivity() {
+
+    var phoneIp = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,21 +55,29 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+        toggle_flash_light_remote_btn.setOnClickListener { sendOrderToServer(FlashLigntUtil.TOGGLE_ORDER) }
+        touch_flash_light_remote_btn.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP -> sendOrderToServer(FlashLigntUtil.TOGGLE_ORDER)
+                else -> Log.i("wtf", "nothing")
+            }
+            true
+        }
     }
 
     @SuppressLint("SetTextI18n")
     fun init() {
         val targetIp = getTargetIp()
         Thread(Runnable {
-            val addr = WifiIpHelper.getWifiIp(this@MainActivity)
+            phoneIp = WifiIpHelper.getWifiIp(this@MainActivity)
             runOnUiThread {
-                ip_tv.text = "本地局域网IP：$addr"
-                target_ip_et.setText(if (TextUtils.isEmpty(targetIp)) addr else targetIp)
+                ip_tv.text = "本地局域网IP：$phoneIp"
+                target_ip_et.setText(if (TextUtils.isEmpty(targetIp)) phoneIp else targetIp)
                 Handler().postDelayed({
                     JPushInterface.setAlias(this, 1, "flash_light")
                     val set = HashSet<String>()
-                    set.add("flash_light_$addr")
-                    Log.i("jiguang", "flash_light_$addr")
+                    set.add("flash_light_$phoneIp")
+                    Log.i("jiguang", "flash_light_$phoneIp")
                     JPushInterface.setTags(this, 1, set)
                 }, 3000)
             }
@@ -96,6 +110,22 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("targetIp", target_ip_et.text.toString())
         editor.apply()
+    }
+
+    fun sendOrderToServer(order: String) {
+        val url = BuildConfig.CLIENTIP + "?target=flash_light_" + phoneIp + "&order=" + order
+        val client = OkHttpClient()
+        val request = Request.Builder().url(url).build()
+        Thread(Runnable {
+            try {
+                val response = client.newCall(request).execute()
+                Log.i("wtf", response.body.toString())
+            } catch (e: Exception) {
+                runOnUiThread {
+                    Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }).start()
     }
 
     override fun onDestroy() {
