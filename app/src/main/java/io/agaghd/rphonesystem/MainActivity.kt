@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendOrderToServer(order: String) {
-        val url = BuildConfig.CLIENTIP + "?target=flash_light_" + phoneIp + "&order=" + order
+        val url = BuildConfig.CLIENTIP + "?target=flash_light_" + target_ip_et.text + "&order=" + order
         val client = OkHttpClient()
         val request = Request.Builder().url(url).build()
         Thread(Runnable {
