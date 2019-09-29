@@ -4,9 +4,11 @@
     <string name="open_flash_light_service">打开监听闪光灯名令服务</string>
     <string name="stop_flash_light_service">停止监听闪光灯名令服务</string>
     <string name="target_ip_hint">对端IP：</string>
+    <string name="app_name_hint">唤醒应用：</string>
     <string name="toggle_flash_light">操作闪光灯</string>
     <string name="toggle_flash_light_remote">远程操作闪光灯</string>
     <string name="touch_flash_light">长按点亮闪光灯</string>
     <string name="touch_flash_light_remote">远程长按点亮闪光灯</string>
     <string name="save">保存</string>
+    <string name="save_and_launch">保存并启动</string>
 </resources>

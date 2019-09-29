@@ -18,8 +18,13 @@ import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
 import io.agaghd.rphonesystem.flashlight.WifiIpHelper
 import io.agaghd.rphonesystem.remote.Orders
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONObject
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
@@ -56,19 +61,30 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
-        toggle_flash_light_remote_btn.setOnClickListener { sendOrderToServer(Orders.TOGGLE_ORDER) }
+        toggle_flash_light_remote_btn.setOnClickListener {
+            sendOrderToServer(
+                Orders.TOGGLE_ORDER,
+                "a", "flash_light_" + target_ip_et.text
+            )
+        }
         touch_flash_light_remote_btn.setOnTouchListener { v, event ->
             when (event.action) {
-                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP -> sendOrderToServer(Orders.TOGGLE_ORDER)
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP -> sendOrderToServer(
+                    Orders.TOGGLE_ORDER,
+                    "b", "flash_light_" + target_ip_et.text
+                )
                 else -> Log.i("wtf", "nothing")
             }
             true
         }
+        save_app_name_btn.setOnClickListener { saveAppName() }
     }
 
     @SuppressLint("SetTextI18n")
     fun init() {
         val targetIp = getTargetIp()
+        val appName = getAppName()
+        app_name_et.setText(appName)
         Thread(Runnable {
             phoneIp = WifiIpHelper.getWifiIp(this@MainActivity)
             runOnUiThread {
@@ -113,10 +129,34 @@ class MainActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    fun sendOrderToServer(order: String) {
-        val url = BuildConfig.CLIENTIP + "?target=flash_light_" + target_ip_et.text + "&order=" + order
+    fun getAppName(): String? {
+        val sharedPreferences = getSharedPreferences("appName", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("appName", "")
+    }
+
+    fun saveAppName() {
+        val sharedPreferences = getSharedPreferences("appName", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("appName", app_name_et.text.toString())
+        editor.apply()
+        sendOrderToServer(Orders.LAUNCH_APP, app_name_et.text.toString(), "flash_light_" + target_ip_et.text)
+    }
+
+
+    fun sendOrderToServer(order: String, param: String, vararg tags: String) {
+        val url = BuildConfig.CLIENTIP
         val client = OkHttpClient()
-        val request = Request.Builder().url(url).build()
+        val json = JSONObject()
+        json.put("order", order)
+        val tag = JSONArray()
+        for (t in tags) {
+            tag.put(t)
+        }
+        tag.put("flash_light_" + target_ip_et.text)
+        json.put("param", param)
+        json.put("tag", tag)
+        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json.toString())
+        val request = Request.Builder().url(url).post(body).build()
         Thread(Runnable {
             try {
                 val response = client.newCall(request).execute()
