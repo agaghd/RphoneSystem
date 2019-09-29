@@ -11,6 +11,7 @@ import cn.jpush.android.api.JPushMessage
 import cn.jpush.android.api.NotificationMessage
 import cn.jpush.android.service.JPushMessageReceiver
 import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
+import io.agaghd.rphonesystem.remote.Orders
 
 class MessageReceiver : JPushMessageReceiver() {
     override fun onTagOperatorResult(p0: Context?, p1: JPushMessage?) {
@@ -31,7 +32,7 @@ class MessageReceiver : JPushMessageReceiver() {
     override fun getNotification(p0: Context?, p1: NotificationMessage?): Notification {
         val content = if (p1 != null) p1.notificationContent else ""
         when (content) {
-            FlashLigntUtil.TOGGLE_ORDER -> FlashLigntUtil.toggleTouchLight()
+            Orders.TOGGLE_ORDER -> FlashLigntUtil.toggleTouchLight()
             else -> Log.i("wtf", content)
         }
         return super.getNotification(p0, p1)

@@ -4,7 +4,6 @@ import android.hardware.Camera
 
 object FlashLigntUtil {
 
-    val TOGGLE_ORDER = "TOGGLE_FLASH_LIGHT"
     val camera = Camera.open()
 
     fun toggleTouchLight() {

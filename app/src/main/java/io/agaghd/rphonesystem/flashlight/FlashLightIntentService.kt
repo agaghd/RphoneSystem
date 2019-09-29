@@ -3,6 +3,7 @@ package io.agaghd.rphonesystem.flashlight
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
+import io.agaghd.rphonesystem.remote.Orders
 import java.lang.Exception
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -26,7 +27,7 @@ class FlashLightIntentService : IntentService("FlashLightIntentService") {
                 service.receive(receivePacket)
                 val receiveMsg = String(receivePacket.data, 0, receivePacket.length)
                 Log.i("wtf", "receiveMsg = $receiveMsg")
-                if (FlashLigntUtil.TOGGLE_ORDER == receiveMsg) {
+                if (Orders.TOGGLE_ORDER == receiveMsg) {
                     FlashLigntUtil.toggleTouchLight()
                 }
             } catch (e: Exception) {

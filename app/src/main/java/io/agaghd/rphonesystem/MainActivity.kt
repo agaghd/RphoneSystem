@@ -16,6 +16,7 @@ import cn.jpush.android.api.JPushInterface
 import io.agaghd.rphonesystem.flashlight.FlashLightIntentService
 import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
 import io.agaghd.rphonesystem.flashlight.WifiIpHelper
+import io.agaghd.rphonesystem.remote.Orders
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -55,10 +56,10 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
-        toggle_flash_light_remote_btn.setOnClickListener { sendOrderToServer(FlashLigntUtil.TOGGLE_ORDER) }
+        toggle_flash_light_remote_btn.setOnClickListener { sendOrderToServer(Orders.TOGGLE_ORDER) }
         touch_flash_light_remote_btn.setOnTouchListener { v, event ->
             when (event.action) {
-                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP -> sendOrderToServer(FlashLigntUtil.TOGGLE_ORDER)
+                MotionEvent.ACTION_DOWN, MotionEvent.ACTION_UP -> sendOrderToServer(Orders.TOGGLE_ORDER)
                 else -> Log.i("wtf", "nothing")
             }
             true
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     fun toggleFlashLignt() {
         Thread(Runnable {
             val client = DatagramSocket()
-            val sendBytes = FlashLigntUtil.TOGGLE_ORDER.toByteArray()
+            val sendBytes = Orders.TOGGLE_ORDER.toByteArray()
             val address = InetAddress.getByName(target_ip_et.text.toString())
             val sendPacket = DatagramPacket(sendBytes, sendBytes.size, address, 9090)
             client.send(sendPacket)
