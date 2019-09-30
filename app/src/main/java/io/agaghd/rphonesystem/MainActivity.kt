@@ -17,6 +17,7 @@ import io.agaghd.rphonesystem.flashlight.FlashLightIntentService
 import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
 import io.agaghd.rphonesystem.flashlight.WifiIpHelper
 import io.agaghd.rphonesystem.remote.Orders
+import io.agaghd.rphonesystem.remote.ServerAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -144,7 +145,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun sendOrderToServer(order: String, param: String, vararg tags: String) {
-        val url = BuildConfig.CLIENTIP
+        val url = BuildConfig.CLIENTIP + "/" + ServerAPI.PUSH_ORDER
         val client = OkHttpClient()
         val json = JSONObject()
         json.put("order", order)
