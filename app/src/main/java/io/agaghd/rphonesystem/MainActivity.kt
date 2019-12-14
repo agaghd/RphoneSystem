@@ -16,6 +16,7 @@ import cn.jpush.android.api.JPushInterface
 import io.agaghd.rphonesystem.flashlight.FlashLightIntentService
 import io.agaghd.rphonesystem.flashlight.FlashLigntUtil
 import io.agaghd.rphonesystem.flashlight.WifiIpHelper
+import io.agaghd.rphonesystem.record.RecordActivity
 import io.agaghd.rphonesystem.remote.Orders
 import io.agaghd.rphonesystem.remote.ServerAPI
 import kotlinx.android.synthetic.main.activity_main.*
@@ -79,6 +80,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
         save_app_name_btn.setOnClickListener { saveAppName() }
+        start_recording_btn.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    RecordActivity::class.java
+                )
+            )
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -140,7 +149,11 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("appName", app_name_et.text.toString())
         editor.apply()
-        sendOrderToServer(Orders.LAUNCH_APP, app_name_et.text.toString(), "flash_light_" + target_ip_et.text)
+        sendOrderToServer(
+            Orders.LAUNCH_APP,
+            app_name_et.text.toString(),
+            "flash_light_" + target_ip_et.text
+        )
     }
 
 
@@ -156,7 +169,8 @@ class MainActivity : AppCompatActivity() {
         tag.put("flash_light_" + target_ip_et.text)
         json.put("param", param)
         json.put("tag", tag)
-        val body = RequestBody.create("application/json; charset=utf-8".toMediaType(), json.toString())
+        val body =
+            RequestBody.create("application/json; charset=utf-8".toMediaType(), json.toString())
         val request = Request.Builder().url(url).post(body).build()
         Thread(Runnable {
             try {
