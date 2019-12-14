@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
@@ -11,136 +10,151 @@
             android:id="@+id/test_light_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             android:text="@string/test_light"
             android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <Button
             android:id="@+id/open_flash_light_service_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             android:text="@string/open_flash_light_service"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/test_light_btn"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/test_light_btn" />
 
     <TextView
             android:id="@+id/ip_tv"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
+            android:gravity="center"
+            android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/open_flash_light_service_btn"
-            tools:text="wwwwwww"
-            android:textSize="16sp"
-            android:gravity="center"
-            tools:background="@color/colorAccent"/>
+            tools:background="@color/colorAccent"
+            tools:text="wwwwwww" />
 
     <TextView
             android:id="@+id/target_ip_hint_tv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
+            android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:gravity="center"
-            android:textSize="16sp"
             android:text="@string/target_ip_hint"
-            app:layout_constraintTop_toBottomOf="@id/ip_tv"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ip_tv" />
 
     <EditText
             android:id="@+id/target_ip_et"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
-            app:layout_constraintTop_toBottomOf="@id/ip_tv"
-            app:layout_constraintLeft_toRightOf="@id/target_ip_hint_tv"
             android:gravity="center_vertical"
-            app:layout_constraintRight_toLeftOf="@+id/save_target_ip_btn"/>
+            app:layout_constraintLeft_toRightOf="@id/target_ip_hint_tv"
+            app:layout_constraintRight_toLeftOf="@+id/save_target_ip_btn"
+            app:layout_constraintTop_toBottomOf="@id/ip_tv" />
 
     <Button
             android:id="@+id/save_target_ip_btn"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
             android:text="@string/save"
-            app:layout_constraintTop_toBottomOf="@id/ip_tv"
             app:layout_constraintLeft_toRightOf="@id/target_ip_et"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ip_tv" />
 
     <Button
             android:id="@+id/toggle_flash_light_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_margin="16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/toggle_flash_light_remote_btn"
             android:text="@string/toggle_flash_light"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/target_ip_hint_tv"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/toggle_flash_light_remote_btn"
+            app:layout_constraintTop_toBottomOf="@id/target_ip_hint_tv" />
 
     <Button
             android:id="@+id/toggle_flash_light_remote_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:layout_margin="16dp"
-            app:layout_constraintLeft_toRightOf="@id/toggle_flash_light_btn"
-            app:layout_constraintRight_toRightOf="parent"
             android:text="@string/toggle_flash_light_remote"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/target_ip_hint_tv"/>
+            app:layout_constraintLeft_toRightOf="@id/toggle_flash_light_btn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/target_ip_hint_tv" />
 
 
     <Button
             android:id="@+id/touch_flash_light_btn"
             android:layout_width="0dp"
-            android:layout_margin="16dp"
             android:layout_height="@dimen/button_height"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/touch_flash_light_remote_btn"
+            android:layout_margin="16dp"
             android:text="@string/touch_flash_light"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/toggle_flash_light_btn"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/touch_flash_light_remote_btn"
+            app:layout_constraintTop_toBottomOf="@id/toggle_flash_light_btn" />
 
     <Button
             android:id="@+id/touch_flash_light_remote_btn"
             android:layout_width="0dp"
-            android:layout_margin="16dp"
             android:layout_height="@dimen/button_height"
-            app:layout_constraintLeft_toRightOf="@id/touch_flash_light_btn"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="16dp"
             android:text="@string/touch_flash_light_remote"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/toggle_flash_light_btn"/>
+            app:layout_constraintLeft_toRightOf="@id/touch_flash_light_btn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toggle_flash_light_btn" />
 
     <TextView
             android:id="@+id/app_name_hint_tv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
+            android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:gravity="center"
-            android:textSize="16sp"
             android:text="@string/app_name_hint"
-            app:layout_constraintTop_toBottomOf="@id/touch_flash_light_btn"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/touch_flash_light_btn" />
 
     <EditText
             android:id="@+id/app_name_et"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
-            app:layout_constraintTop_toBottomOf="@id/touch_flash_light_btn"
-            app:layout_constraintLeft_toRightOf="@id/target_ip_hint_tv"
             android:gravity="center_vertical"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintLeft_toRightOf="@id/target_ip_hint_tv"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/touch_flash_light_btn" />
 
     <Button
             android:id="@+id/save_app_name_btn"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
             android:text="@string/save_and_launch"
-            app:layout_constraintTop_toBottomOf="@id/app_name_hint_tv"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_name_hint_tv" />
+
+    <Button
+            android:id="@+id/start_recording_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_recording"
+            app:layout_constraintTop_toBottomOf="@id/save_app_name_btn" />
+
+    <Button
+            android:id="@+id/view_recording_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_recording"
+            app:layout_constraintTop_toBottomOf="@id/start_recording_btn" />
+
 </android.support.constraint.ConstraintLayout>

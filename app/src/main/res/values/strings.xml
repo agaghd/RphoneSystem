@@ -11,4 +11,6 @@
     <string name="touch_flash_light_remote">远程长按点亮闪光灯</string>
     <string name="save">保存</string>
     <string name="save_and_launch">保存并启动</string>
+    <string name="start_recording">启动摄像上传</string>
+    <string name="view_recording">查看摄像上传</string>
 </resources>
